@@ -9,6 +9,7 @@ echo "$DIR"
 # try() { "$@" || die "cannot $*"; }
 
 # ls -lRah --color
+echo "Present working directory: $PWD"
 
 apt-get update
 
@@ -26,7 +27,7 @@ else
    cd ./github-source 
 fi
 apt-get install docker -y
-echo "$PWD"
+echo "Present working directory: $PWD"
 
 docker -v
 
