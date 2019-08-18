@@ -10,6 +10,9 @@ echo "$DIR"
 
 # ls -lRah --color
 
+apt-get update
+apt-get install docker -y
+
 echo "Docker build started at: $date"
 
 [ -d ./docker-compose-source ] && echo "Directory for docker-compose-source exists" && SEPARATE_DOCKER_COMPOSE=true || echo "No docker-compose-source found!" && SEPARATE_DOCKER_COMPOSE=false
