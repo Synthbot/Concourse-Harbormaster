@@ -1,0 +1,107 @@
+resources:
+- name: concourse-sandbox
+  icon: github-circle
+  type: git
+  source:
+    uri: https://github.com/Synthbot/concourse-sandbox.git
+    branch: master
+
+- name: concourse-harbormaster
+  icon: github-circle
+  type: git
+  source:
+    uri: https://github.com/Synthbot/concourse-harbormaster.git
+    branch: master
+
+- name: concourse-arm
+  icon: github-circle
+  type: git
+  source:
+    uri: https://github.com/cirocosta/concourse-arm.git
+    branch: master
+
+- name: docker-compose-latest
+  icon: docker
+  type: docker-image
+  source:
+      repository: docker/compose
+      # tag: "latest"
+
+- name: ubuntu-latest
+  icon: docker
+  type: docker-image
+  source:
+      repository: ubuntu
+      # tag: latest
+
+- name: alpine-latest
+  icon: docker
+  type: docker-image
+  source:
+      repository: alpine
+      # tag: "latest"
+
+- name: openJDK-latest
+  icon: docker
+  type: docker-image
+  source:
+      repository: openjdk
+      # tag: "latest"
+
+- name: node-latest
+  icon: docker
+  type: docker-image
+  source:
+      repository: node
+      # tag: "latest"
+
+- name: chrome-latest
+  icon: docker
+  type: docker-image
+  source:
+      repository: alpeware/chrome-headless-trunk
+      # tag: "latest"
+# --- #
+jobs:
+- name: build-docker-image
+  public: true
+  build_log_retention:
+    builds: 10
+    days: 7
+  
+  plan:
+  - in_parallel:
+    - get: docker-compose-latest
+      trigger: true
+    - get: concourse-harbormaster
+      trigger: true
+  # - in_parallel:
+    - get: concourse-arm
+      trigger: true
+    - get: concourse-sandbox
+      trigger: true
+    - get: ubuntu-latest
+      trigger: true
+    - get: alpine-latest
+      trigger: true
+    - get: openJDK-latest
+      trigger: true
+    - get: node-latest
+      trigger: true
+    - get: chrome-latest
+      trigger: true
+
+  - task: barge
+    privileged: true
+    image: docker-compose-latest
+    input_mapping: {github-source: concourse-sandbox, pipeline-source: concourse-harbormaster, docker-compose-source: concourse-arm}
+    config:
+      platform: linux
+      inputs:
+        - name: github-source
+        - name: pipeline-source
+        - name: docker-compose-source
+      run:
+        path: pipeline-source/scripts/barge.sh
+      params: 
+        DOCKER_IMAGE_NAME: foobar/test
