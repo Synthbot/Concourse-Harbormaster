@@ -42,7 +42,12 @@ echo "Present working directory: $PWD"
 
 docker -v
 
-find ./path -iname 'dockerfile' -type f || echo "No dockerfile found!"
+if cmd [ find . -iname dockerfile -type f ]; then
+   # Control will enter here if $DIRECTORY exists.
+   echo "Directory for docker-compose-source exists"
+else
+   echo "No dockerfile found!"
+fi
 
 docker build -t "$DOCKER_IMAGE_NAME" .
 docker image ls
