@@ -26,7 +26,7 @@ then
 else
    cd ./github-source 
 fi
-apt-get install -y docker-ce 
+apt-get install -y docker.io
 echo "Present working directory: $PWD"
 
 docker -v
