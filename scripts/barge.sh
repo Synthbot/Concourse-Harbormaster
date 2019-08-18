@@ -15,10 +15,11 @@ apt-get update
 
 echo "Docker build started at: $date"
 
-[ -d ./docker-compose-source ] && echo "Directory for docker-compose-source exists" && SEPARATE_DOCKER_COMPOSE=true || echo "No docker-compose-source found!" && SEPARATE_DOCKER_COMPOSE=false
+[ -d ./docker-compose-source ] && echo "Directory for docker-compose-source exists" SEPARATE_DOCKER_COMPOSE=true 
+/|| echo "No docker-compose-source found!" SEPARATE_DOCKER_COMPOSE=false
 [ -d ./github-source ] && echo "Directory for github-source exists" || echo "No github-source found!" 
 
-echo "SEPARATE_DOCKER_COMPOSE"
+echo "Separate Docker Compose: $SEPARATE_DOCKER_COMPOSE"
 
 if [ "$SEPARATE_DOCKER_COMPOSE" = "true" ];
 then
