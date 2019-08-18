@@ -37,17 +37,22 @@ if [ "$SEPARATE_DOCKER_COMPOSE" = "true" ]; then
 else
    cd ./github-source 
 fi
+echo "Started installing Docker at: $date"
 apt-get install -y docker.io
+echo "Docker installed successfully at: $date"
+
 echo "Present working directory: ""$PWD"
 
 docker -v
-{ find . -iname dockerfile -type f; }
+
 if { find . -iname dockerfile -type f; }; then
    # Control will enter here if $DIRECTORY exists.
    echo "Directory for docker-compose-source exists"
 else
    echo "No dockerfile found!"
+   exit 101;
 fi
+systemctl start docker
 
 docker build -t "$DOCKER_IMAGE_NAME" .
 docker image ls
