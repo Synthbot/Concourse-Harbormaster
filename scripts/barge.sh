@@ -11,7 +11,7 @@ echo "$DIR"
 # ls -lRah --color
 echo "Present working directory: $PWD"
 
-sudo apt-get update
+apt-get update
 
 echo "Docker build started at: $date"
 
@@ -26,7 +26,7 @@ then
 else
    cd ./github-source 
 fi
-sudo apt-get install -y docker-ce 
+apt-get install -y docker-ce 
 echo "Present working directory: $PWD"
 
 docker -v
