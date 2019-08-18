@@ -9,7 +9,7 @@ echo "$DIR"
 # try() { "$@" || die "cannot $*"; }
 
 # ls -lRah --color
-echo "Present working directory: $PWD"
+echo "Present working directory: ""$PWD"
 
 apt-get update
 
@@ -30,7 +30,7 @@ else
    fi
 fi
 
-echo "Separate Docker Compose: $SEPARATE_DOCKER_COMPOSE"
+echo "Separate Docker Compose: ""$SEPARATE_DOCKER_COMPOSE"
 
 if [ "$SEPARATE_DOCKER_COMPOSE" = "true" ]; then
    cd ./docker-compose-source 
@@ -38,11 +38,11 @@ else
    cd ./github-source 
 fi
 apt-get install -y docker.io
-echo "Present working directory: $PWD"
+echo "Present working directory: ""$PWD"
 
 docker -v
-
-if cmd [ find . -iname dockerfile -type f ]; then
+{ find . -iname dockerfile -type f; }
+if { find . -iname dockerfile -type f; }; then
    # Control will enter here if $DIRECTORY exists.
    echo "Directory for docker-compose-source exists"
 else
