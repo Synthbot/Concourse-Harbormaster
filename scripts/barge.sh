@@ -7,11 +7,9 @@ yell() { echo "$0: $*" >&2; }
 die() { yell "$*"; exit 111; }
 try() { "$@" || die "cannot $*"; }
 
-SEPARATE_DOCKER_COMPOSE="false"
-
 # ls -lRah --color
 
-[ -d ./docker-compose-source ] && echo "Directory for docker-compose-source exists" && SEPARATE_DOCKER_COMPOSE="true"
+[ -d ./docker-compose-source ] && echo "Directory for docker-compose-source exists" && SEPARATE_DOCKER_COMPOSE="true" || echo "No docker-compose-source found!" && SEPARATE_DOCKER_COMPOSE="false"
 [ -d ./github-source ] && echo "Directory for github-source exists" || echo "No github-source found!" && exit 101
 
 echo $SEPARATE_DOCKER_COMPOSE
