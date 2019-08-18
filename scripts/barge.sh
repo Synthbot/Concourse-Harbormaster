@@ -3,11 +3,11 @@ set -e
 DIR=$( dirname "${BASH_SOURCE[0]}" )
 echo "$DIR"
 
-SEPARATE_DOCKER_COMPOSE=false
+SEPARATE_DOCKER_COMPOSE="false"
 
 ls -lRah --color
 
-[ -d /docker-compose-source ] && echo "Directory for docker-compose-source exists" || $SEPARATE_DOCKER_COMPOSE=true
+[ -d /docker-compose-source ] && echo "Directory for docker-compose-source exists" && SEPARATE_DOCKER_COMPOSE="true"
 [ -d /github-source ] && echo "Directory for github-source exists" || echo "No github-source found!" && exit
 
 if [ "$SEPARATE_DOCKER_COMPOSE" = "true" ];
