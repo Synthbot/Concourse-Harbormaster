@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+export TERM=dumb
 DIR=$( dirname "${BASH_SOURCE[0]}" )
 echo "$DIR"
 
@@ -9,7 +10,7 @@ echo "$DIR"
 
 # ls -lRah --color
 
-[ -d ./docker-compose-source ] && echo "Directory for docker-compose-source exists" && SEPARATE_DOCKER_COMPOSE="true" || echo "No docker-compose-source found!" && SEPARATE_DOCKER_COMPOSE="false"
+[ -d ./docker-compose-source ] && echo "Directory for docker-compose-source exists" && SEPARATE_DOCKER_COMPOSE=true || echo "No docker-compose-source found!" && SEPARATE_DOCKER_COMPOSE=false
 [ -d ./github-source ] && echo "Directory for github-source exists" || echo "No github-source found!" && exit 101
 
 echo $SEPARATE_DOCKER_COMPOSE
