@@ -13,7 +13,7 @@ echo "$DIR"
 echo "Docker build started at: $date"
 
 [ -d ./docker-compose-source ] && echo "Directory for docker-compose-source exists" && SEPARATE_DOCKER_COMPOSE=true || echo "No docker-compose-source found!" && SEPARATE_DOCKER_COMPOSE=false
-[ -d ./github-source ] && echo "Directory for github-source exists" || echo "No github-source found!" && exit 101
+[ -d ./github-source ] && echo "Directory for github-source exists" || echo "No github-source found!" 
 
 echo "SEPARATE_DOCKER_COMPOSE"
 
@@ -26,7 +26,7 @@ fi
 
 echo "$PWD"
 
-find ./path -iname 'dockerfile' -type f || echo "No dockerfile found!" && exit 101
+find ./path -iname 'dockerfile' -type f || echo "No dockerfile found!"
 
 docker build -t "$DOCKER_IMAGE_NAME" .
 docker image ls
