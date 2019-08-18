@@ -3,9 +3,9 @@ set -e
 DIR=$( dirname "${BASH_SOURCE[0]}" )
 echo "$DIR"
 
-yell() { echo "$0: $*" >&2; }
-die() { yell "$*"; exit 111; }
-try() { "$@" || die "cannot $*"; }
+# yell() { echo "$0: $*" >&2; }
+# die() { yell "$*"; exit 111; }
+# try() { "$@" || die "cannot $*"; }
 
 # ls -lRah --color
 
