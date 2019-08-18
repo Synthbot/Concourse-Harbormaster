@@ -10,10 +10,12 @@ echo "$DIR"
 
 # ls -lRah --color
 
+echo "Docker build started at: $date"
+
 [ -d ./docker-compose-source ] && echo "Directory for docker-compose-source exists" && SEPARATE_DOCKER_COMPOSE=true || echo "No docker-compose-source found!" && SEPARATE_DOCKER_COMPOSE=false
 [ -d ./github-source ] && echo "Directory for github-source exists" || echo "No github-source found!" && exit 101
 
-echo $SEPARATE_DOCKER_COMPOSE
+echo "SEPARATE_DOCKER_COMPOSE"
 
 if [ "$SEPARATE_DOCKER_COMPOSE" = "true" ];
 then
@@ -22,7 +24,11 @@ else
    cd ./github-source 
 fi
 
+echo "$PWD"
+
 find ./path -iname 'dockerfile' -type f || echo "No dockerfile found!" && exit 101
 
-docker build -t $DOCKER_IMAGE_NAME .
+docker build -t "$DOCKER_IMAGE_NAME" .
 docker image ls
+
+echo "Docker build complete at: $date"
