@@ -11,7 +11,6 @@ echo "$DIR"
 # ls -lRah --color
 
 apt-get update
-apt-get install docker -y
 
 echo "Docker build started at: $date"
 
@@ -26,8 +25,10 @@ then
 else
    cd ./github-source 
 fi
-
+apt-get install docker -y
 echo "$PWD"
+
+docker -v
 
 find ./path -iname 'dockerfile' -type f || echo "No dockerfile found!"
 
